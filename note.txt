@@ -1,0 +1,6 @@
+ Khi sử dụng giả lập api: JSON-SERVER :
+ + json-server mặc định chạy port=3000 nên khi tích hợp thì cần phải tránh port này hoặc ta setup lại port json-server
+ + khi run json-server và set port: "npx json-server --watch -p 3333 server.json"
+=> với 3333: là port mà mong muốn thay đổi port mặc định của server
+=> server.json là tên file mà mình tạo ra dữ liệu giả
+=> và phải chắc chắn máy tính đã cài json-server: "npm install -g json-server"
