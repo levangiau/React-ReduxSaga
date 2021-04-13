@@ -1,14 +1,15 @@
-export const STATUSUSE=[
-    {
-        value:0,
-        label:'READY'
-    },
-    {
-        value:1,
-        label:'INPROGRESS'
-    },
-    {
-        value:2,
-        label:'COMPLETED'
-    }
+export const API_ENDPOINT = "http://localhost:4000";
+export const STATUSUSE = [
+  {
+    value: 0,
+    label: "READY",
+  },
+  {
+    value: 1,
+    label: "INPROGRESS",
+  },
+  {
+    value: 2,
+    label: "COMPLETED",
+  },
 ];
