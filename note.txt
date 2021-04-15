@@ -4,3 +4,125 @@
 => với 3333: là port mà mong muốn thay đổi port mặc định của server
 => server.json là tên file mà mình tạo ra dữ liệu giả
 => và phải chắc chắn máy tính đã cài json-server: "npm install -g json-server"
+---------------------------------------------------------------
+ Khi sử dụng redux-thunk thì những phương thức lấy api nên thêm "Request" vào sau đuôi tên hàm đó để cho hiểu
+ khi đó là do redux-thunk đang xử lí.
+
+-------------------------------------------------------------------------------------------------------
+
+----------------------------------TÌM HIỂU CÁC PACKAGE CÓ MIDDLEWARE-------------------------------------
+
+Side-effect là gì??
+=> side-effect là những tương tác với ứng dụng như: gọi Api, đọc ghi file,.......
+
+Side-effect được xử lý ở đâu?
+=> side-effect được xử lý ở action hoặc ở middleware
+=> tuyệt đối không được xử lý ở reducer do reducer là hàm thuần tý (pure-function)
+
+Redux-thunk là gì?
+
+=>Redux-thunk là một package, nó cung cấp middleware để xử lý các hàm được gửi từ action.Middleware và action
+cùng làm việc với nhau.
+
+Điểm mạnh của Redux-thunk là gi?
+
+=>Điểm mạnh: 
+   + đơn giản, nhiều ví dụ, source example nhiều
+   + mạnh mẽ
+   + dễ dàng sử dụng
+   + dung lượng của package nhẹ
+=>Điểm yếu:
+   + khó đọc,khó maintain
+   + giải quyết bài toán với nhiều dòng code, phức tạp, khó mô tả được code cụ thể cho người sau đọc code
+
+Redux-Saga là gì?
+
+=> Redux-Saga cũng tương tự như ae của nó Redux-thunk là cũng xử lý được những vấn đề side-effect
+
+Luồng của Redux-saga đi như thế nào?
+
+=> component -> action -> redux-saga - store
+
+Điểm mạnh của Redux-saga là gì?
+
+=> + Xử lý được những side-effect
+   + Xử lý được những thuật toán khá phức tạp
+   + Có khả năng xử lý được những code không đồng bộ
+   + Sử dụng tính năng ES6:generator
+   + Giải quyết được những vấn đề song song và tuần tự
+   + Giúp clean code
+   + Giải quyết những quy trình dài hạn
+
+=> Những thuật toán phức tập rất dễ dãn tới callback hell function.
+
+Callback hell function là gì?
+
+=> Callback hell function thực chất là những hàm callback lồng nhau nhưng bắt buộc phải đầu ra của function
+trước đó là đầu vào của hàm kế tiếp.VD:
+ function a ('api/tuoica){
+   retrun a' =  function b ('api/cauca'){
+        return b' =  function c('api/dingu'){
+            ........
+        }
+     }
+}
+
+Điểm yếu của Redux-saga là gì?
+
+=> + Phức tạp
+   + Nặng về xử lý không dành cho những dự án đơn giản
+   + Thời gian để thành viên mới tìm hiểu khá khó
+
+Sự khác nhau giữa Redux-thunk và Redux-Saga là gì?
+
+=>        Redux-thunk                                       Redux-Saga
+    - common Redux middleware                       - common Redux middleware
+    - Chạy trong môi trường JavaScript              - Chạy trong môi trường ES6
+    - Không có sẳng các giải quyết các bài          - Sử dụng từ khóa yeild và generators để đơn
+    toán về asynchronsos                             giản hóa về asynchronsos
+    - Không thể phối hợp và giao tiếp giữa          - Các side-effect có thể liên kết với nhau
+    các side-effect lại với nhau
+
+-----------------------------------------------------------------------------------------------
+
+-----------------------GENERATOR FUNCTION TRONG REDUX-SAGA -----------------------------------
+
+Generator function là gì?
+
+=> là một function, là các quy trình nền, chương trình con có khả năng tạm dừng và tiếp tục chạy.
+có khả năng thoát khỏi hàm sau đó nhập lại vào trong hàm và chạy tiếp .Mỗi lần thoát ra và chạy lại
+như vậy có thể lưu trữ các biến.
+
+=> generator khi gặp biến 'yeild' thì nó sẽ tạm dựng và trả kết quả sau đó nó lại chạy tiếp tục đến khi 
+hết các câu lệnh nhưng khi gặp từ khóa 'return' hoặc 'throw error' thì nó sẽ kết thúc fucntion đó luôn và những hàm sau câu gọi
+đó sẽ không thực thi. 
+
+=> generator không trả về giá trị khi được gọi bằng thông thường hay gán nó. ví dụ:
+function* a(){retun 'sss'}; 
+let ab = a();
+console.log(ab);
+
+=> Khi đó nó chỉ trả về interator.
+
+=> interator là bao gồm mảng giá trị được thực thi từ khi bắt đầu đến khi
+kết thúc
+
+=> nên muốn lấy ra giá trị ta phải dùng tới hàm  'next' của nó.VD:
+
+function* a(){ yeild 2010 retun 'sss'}; 
+let ab = a();
+console.log(ab.next()); => kết quả: {done:false, value:2010}
+console.log(ab.next()); => kết quả: {done:true, value:'sss'}
+
+=> với done: true hoặc false : nó chỉ trạng thái của interator đó còn giá trị nữa không nếu trạng thái làm
+false thì generator vẫn còn các giá trị và ngược lại
+=> value là giá trị nó trả về.
+
+=> Nhưng nếu như không gán generator mà gọi trực tiếp thì nó sẽ chạy hết câu lệnh đó và nhập lệnh trở lại gọi
+tiếp tục.VD;
+
+function* a(){yeild 2010 retun 'sss'}; 
+console.log(a().next()); => kết quả: {done:false, value:2010}
+console.log(a().next()); => kết quả: {done:false, value:2010}
+
+=> nên kết quả sẽ không thay đổi nên gọi là instace interator
