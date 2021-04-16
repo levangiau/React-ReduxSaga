@@ -126,3 +126,40 @@ console.log(a().next()); => kết quả: {done:false, value:2010}
 console.log(a().next()); => kết quả: {done:false, value:2010}
 
 => nên kết quả sẽ không thay đổi nên gọi là instace interator
+
+=> nếu muốn lòng 1 generator trong 1 generator khác thì thay vì chúng ta gán biến nhưng như thế thì kết quả ko 
+được như mong muốn nên chúng ta sử dụng từ khóa ' yeild* ' để thoát khỏi generator này mà tới generator khác 
+được chỉ định chạy sau khi chạy xong hết generator đó nó sẽ quay lại generator cũ và chạy lại ngay lúc nó rời
+khỏi generator function
+
+Tóm lại: generator là cốt lỗi của redux-saga. Đặc điểm của generator là có khả năng thoát ra khỏi hàm generator
+và quay lại đúng vị trí mà nó đã dừng và tiếp tục chạy cho đến khi nào gặp return hoặc yeild thì mới kết thúc
+một generator function và muốn lấy được giá trị trong generator fucntion ta phải dùng từ khóa yeild hoặc return
+mỗi lần muốn lấy giá trị ra ta phải gọi đến hàm next() kết quả trả về của generator function là interator.
+
+--------------------------------------------------------------------------------------------------------------
+
+--------------------------------------GENERATOR LOOP-------------------------------------------------
+
+Loop là gì??
+
+=> loop là trạng thái lập vô tận gây nguy hiểm cho ứng dụng hoặc thậm chỉ gây crash ứng dựng.
+
+=> tuy nhiên trong generator thì loop là một phương thức sử dụng có hiệu quả và được ứng dụng loop vào generator
+rất nhiều
+
+Vì sao mà loop lại được dùng trong generator mà trong khi loop nó gây nguy hiểm như thế?
+
+=> do trong bản chất generator đặc biệt nó chỉ trả về giá trị khi được gọi đến từ khóa return hoặc yeild và 
+nó trả ra kết quả khi gọi đến function next() chính vì thế mặc cho dù có loop thì vẫn không gây nguy hiểm cho
+ứng dụng đang chạy
+
+-------------------------------------------------------------------------------------------------------------
+
+-------------------------------------SAGA------------------------------------
+
+Saga là gì?
+
+=> Root Saga là entry point của saga là nơi điều phối tất cả các saga khác sử dụng trong ứng dụng
+=> Root Saga dùng để khởi động các saga khác chạy nền theo dõi, xử lý và kích hoạt xử lý các action
+=> vậy Saga là nơi đăng ký theo dõi xử lý các action.
