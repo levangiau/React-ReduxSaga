@@ -1,5 +1,4 @@
 import * as Types from "./../constant/task";
-import * as taskApi from "./../apis/task";
 
 export const fetchListTask = () => {
   return {
@@ -32,18 +31,18 @@ export const fetchListTaskFailed = (err) => {
  * @returns
  */
 
-export const fetchListTaskRequest = () => {
-  return (dispatch) => {
-    dispatch(fetchListTask());
-    return taskApi
-      .getList()
-      .then((res) => {
-        // console.log(res);
-        dispatch(fetchListTaskSuccess(res.data));
-      })
-      .catch((err) => {
-        // console.log(err);
-        dispatch(fetchListTaskFailed(err));
-      });
-  };
-};
+// export const fetchListTaskRequest = () => {
+//   return (dispatch) => {
+//     dispatch(fetchListTask());
+//     return taskApi
+//       .getList()
+//       .then((res) => {
+//         // console.log(res);
+//         dispatch(fetchListTaskSuccess(res.data));
+//       })
+//       .catch((err) => {
+//         // console.log(err);
+//         dispatch(fetchListTaskFailed(err));
+//       });
+//   };
+// };

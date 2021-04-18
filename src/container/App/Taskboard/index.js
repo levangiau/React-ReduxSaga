@@ -55,12 +55,18 @@ class TaskBoard extends React.Component {
     return xhtml;
   }
 
-  componentDidMount() {
+  // componentDidMount() {
+  //   const { taskActionCreator } = this.props;
+  //   // const { fetchListTaskRequest } = taskActionCreator;
+  //   // fetchListTaskRequest();
+  //   const { fetchListTask } = taskActionCreator;
+  //   fetchListTask();
+  // }
+  loadData = () => {
     const { taskActionCreator } = this.props;
-    const { fetchListTaskRequest } = taskActionCreator;
-    fetchListTaskRequest();
-  }
-
+    const { fetchListTask } = taskActionCreator;
+    fetchListTask();
+  };
   handleOpen = () => {
     this.setState({
       open: true,
@@ -81,6 +87,9 @@ class TaskBoard extends React.Component {
     // const { classes } = this.props;
     return (
       <div className="taskboard">
+        <Button variant="contained" color="primary" onClick={this.loadData}>
+          Load data
+        </Button>
         <Button variant="contained" color="primary" onClick={this.handleOpen}>
           <AddIcon /> Thêm mới công việc
         </Button>

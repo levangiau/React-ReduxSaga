@@ -163,3 +163,84 @@ Saga là gì?
 => Root Saga là entry point của saga là nơi điều phối tất cả các saga khác sử dụng trong ứng dụng
 => Root Saga dùng để khởi động các saga khác chạy nền theo dõi, xử lý và kích hoạt xử lý các action
 => vậy Saga là nơi đăng ký theo dõi xử lý các action.
+
+----------------------------------------------------------------------------------------------------------
+
+--------------------------------------------SAGA EFFECT---------------------------------------------------
+
+Saga effect là gì?
+
+=> Quản lí các effect dựa vào các helper: Fork,take,call,...
+=> Saga trả về các mô tả logic ở dạng đối tượng, hay còn gọi là effect.Saga sử dụng các helpers method để trả
+về các effect sau đó gửi cho middleware xử lý các effect.
+
+   -----------------------------------------------FORK---------------------------------------------------
+
+Fork là gì???
+
+=> Fork là một trong những redux-saga effect
+
+Đầu vào của Fork là gì?
+
+=> Đầu vào là 1 generator function
+
+Fork dùng để làm gì?
+
+=> Những action trong fork là những generator function
+=> Fork dùng để rẻ nhánh giống như if else, switch case,...
+=> Cho phép saga chuyển bộ theo dõi cùng lúc
+=> Mỗi fork là non-blocking : có thể kích hoạt nhiều theo dõi cùng lúc.
+
+Dùng Fork khi nào??
+
+=> Nhóm các Saga theo miền logic nào đó.VD: theo chức năng: authSaga có  cùng login, logout, refresh token
+=> Lưu trữ các tham chiếu đến các saga có thể hủy hoặc vào lại.
+
+   -----------------------------------------------TAKE & CALL----------------------------------------------
+
+Take là gì?
+
+=>
+
+Đầu vào của Take là gì?
+
+=> Đầu vào của take là một action được dispatch
+
+Take dùng để làm gì?
+
+=> Dùng để phản hồi các action khi action được dispatch
+=> Mỗi take là một blocking
+=> Take sẽ được kích hoạt khi tham gia vào saga khi action được dispatch và tạm dừng cho đến khi nhận action khác
+
+Call là gì?
+
+=> Tương tự như call trong JavaScript
+
+Call dùng để làm gì?
+
+=> Thường dùng để gửi 1 Request, call Api
+=> Mỗi call là một blocking
+=> Giống như việc thực hiện một function. Trả về promise và sẽ tạm dừng saga cho đến khi saga đó được resolved
+
+   -----------------------------------------------PUT----------------------------------------------
+
+Put là gì?
+
+=> là một trong những helpers của redux-saga effect
+
+Put dùng khi nào?
+
+=> Dùng để dispatch một action
+=> Mỗi put là non-blocking
+
+   -----------------------------------------------DELAY----------------------------------------------
+
+Delay là gì?
+
+=> Là một trong những helpers của redux-saga effect và dùng để tạm dừng hành động hoặc phương thức trong thời gian quy định
+
+Delay dùng để làm gì?
+
+=> Dùng để chặn thực thi trong saga
+=> Đầu vào là thời gian (miliseconds)
+=> Là một blocking

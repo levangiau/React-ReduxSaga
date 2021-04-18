@@ -6,11 +6,14 @@ import configureStore from "./redux/configureStore";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./generator";
+import GlobalLoading from "./components/Global_Loading";
+
 const store = configureStore();
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ToastContainer />
+      <GlobalLoading />
       <App />
     </Provider>
   </React.StrictMode>,
