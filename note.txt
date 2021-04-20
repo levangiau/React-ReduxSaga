@@ -244,3 +244,37 @@ Delay dùng để làm gì?
 => Dùng để chặn thực thi trong saga
 => Đầu vào là thời gian (miliseconds)
 => Là một blocking
+
+-----------------------------------------------TAKELATEST----------------------------------------------
+
+Takelatest là gì?
+
+=> Takelatest là một trong những helpers của redux-saga effect và nó là sự kết hợp giữa helper fork và take,
+và nó được bổ sung nhiều chức năng nâng cao và mạnh mẽ.
+=> Khi sử dụng Takelatest thì không cần vòng lập vô hạn để gọi những helper take nữa
+
+Takelatest dùng để làm gì?
+
+=> Thực hiện một loạt action và Takelatest chỉ thực thi và lấy kết quả của action cuối cùng
+=> Hủy bỏ quy trình cũ khi có một quy trình mới bắt đầu
+
+-----------------------------------------------SELECT----------------------------------------------
+
+Select là gì?
+
+=> Select là một trong những helpers của redux-saga effect và nó trỏ đến dữ liệu cần lấy trong store
+
+Select dùng để làm gì??
+
+=> Dùng để lấy dữ liệu trong store tại saga
+
+-----------------------------------------------TAKEEVERY----------------------------------------------
+
+TakeEvery là gì?
+
+=> TakeEvery là một trong những helpers của redux-saga effect 
+
+TakeEvery dùng để làm gì?
+
+=> TakeEvery sẽ chạy khi được kích hoạt, chạy không tính số lần, gọi là nó sẽ chạy và chạy không cần biết
+action trước đó chạy xong hay chưa.

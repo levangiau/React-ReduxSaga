@@ -1,6 +1,6 @@
-import { fork, take, call, put, delay } from "redux-saga/effects";
+import { fork, take, call, put, delay, takeLatest, select } from "redux-saga/effects";
 import * as Types from "./../constant/task";
-import { fetchListTaskSuccess, fetchListTaskFailed } from "./../actions/task";
+import { fetchListTaskSuccess, fetchListTaskFailed, filterTaskSuccess } from "./../actions/task";
 import { getList } from "./../apis/task";
 import { STATUS_CODE } from "./../constant";
 import { showLoading, hiddenLoading } from "./../actions/ui";
@@ -40,15 +40,28 @@ function* watchFetchListTaskAction() {
   }
 }
 
-function* watchCreateTask() {
-  console.log("watchCreateTask");
+// function* watchCreateTask() {
+//   console.log("watchCreateTask");
+// }
+
+function* filterTaskSaga({payload}){
+  yield delay(500);
+  const {keyword} = payload;
+  const list = yield select(state=> state.task.listTask);
+  const filterTask = list.filter(task=>
+    task.title
+    .trim()
+    .toLowerCase()
+    .includes(keyword.trim().toLowerCase()));
+  yield put(filterTaskSuccess(filterTask));
 }
 
 function* rootSaga() {
   console.log("this is saga");
   //những hàm trong fork thì thực hiện song song gọi hàm nào trước cũng được gọ là non-blocking
   yield fork(watchFetchListTaskAction);
-  yield fork(watchCreateTask);
+  // yield fork(watchCreateTask);
+  yield takeLatest(Types.FILTER_TASK, filterTaskSaga);
 }
 
 export default rootSaga;

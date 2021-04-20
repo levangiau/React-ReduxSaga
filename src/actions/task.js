@@ -46,3 +46,21 @@ export const fetchListTaskFailed = (err) => {
 //       });
 //   };
 // };
+
+export const filterTask=keyword=>{
+  return{
+    type:Types.FILTER_TASK,
+    payload:{
+      keyword,
+    }
+  }
+};
+
+export const filterTaskSuccess=data=>{
+  return{
+    type:Types.FILTER_TASK_SUCCESS,
+    payload:{
+      data,
+    }
+  }
+};

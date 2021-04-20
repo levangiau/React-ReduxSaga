@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 import styles from "./style";
-import { Box, withStyles } from "@material-ui/core";
+import {  withStyles } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import Grid from "@material-ui/core/Grid";
 import { STATUSUSE } from "../../../constant";
@@ -11,7 +11,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as taskAction from "../../../actions/task";
 import PropTypes from "prop-types";
-import { toast } from "react-toastify";
+import SearchBox from "./../../../components/SearchBox";
+// import { toast } from "react-toastify";
 //
 // const listTask = [
 //   {
@@ -77,12 +78,27 @@ class TaskBoard extends React.Component {
       open: false,
     });
   };
+
   renderForm() {
     let xhtml = null;
     const { open } = this.state;
     xhtml = <TaskForm open={open} close={this.handleClose} />;
     return xhtml;
+  };
+
+  handleFilter=(e)=>{
+    const {value} = e.target;
+    const { taskActionCreator } = this.props;
+    const { filterTask } = taskActionCreator;
+    filterTask(value);
   }
+
+  renderSearchBox=()=>{
+    let xhtml = null;
+    xhtml = <SearchBox handleChange={this.handleFilter}/>
+    return xhtml;
+  }
+
   render() {
     // const { classes } = this.props;
     return (
@@ -93,7 +109,7 @@ class TaskBoard extends React.Component {
         <Button variant="contained" color="primary" onClick={this.handleOpen}>
           <AddIcon /> Thêm mới công việc
         </Button>
-
+        {this.renderSearchBox()}
         {this.renderBoard()}
         {this.renderForm()}
       </div>
@@ -107,6 +123,7 @@ TaskBoard.propTypes = {
     fetchListTaskRequest: PropTypes.func,
   }),
   listTask: PropTypes.array,
+  filterTask:PropTypes.func,
 };
 //control store
 const mapStateToProps = (state) => {
