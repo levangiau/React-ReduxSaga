@@ -56,13 +56,13 @@ class TaskBoard extends React.Component {
     return xhtml;
   }
 
-  // componentDidMount() {
-  //   const { taskActionCreator } = this.props;
-  //   // const { fetchListTaskRequest } = taskActionCreator;
-  //   // fetchListTaskRequest();
-  //   const { fetchListTask } = taskActionCreator;
-  //   fetchListTask();
-  // }
+  componentDidMount() {
+    const { taskActionCreator } = this.props;
+    // const { fetchListTaskRequest } = taskActionCreator;
+    // fetchListTaskRequest();
+    const { fetchListTask } = taskActionCreator;
+    fetchListTask();
+  }
   loadData = () => {
     const { taskActionCreator } = this.props;
     const { fetchListTask } = taskActionCreator;
