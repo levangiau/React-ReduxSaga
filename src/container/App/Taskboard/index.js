@@ -10,6 +10,7 @@ import TaskForm from "../../../components/TaskForm";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as taskAction from "../../../actions/task";
+import * as modalAction from "../../../actions/modal";
 import PropTypes from "prop-types";
 import SearchBox from "./../../../components/SearchBox";
 // import { toast } from "react-toastify";
@@ -69,9 +70,11 @@ class TaskBoard extends React.Component {
     fetchListTask();
   };
   handleOpen = () => {
-    this.setState({
-      open: true,
-    });
+    const {modalActionCreator} =this.props;
+    const {showModal,changeModalContent,changModalTitle} = modalActionCreator;
+    showModal();
+    changModalTitle('Thêm mới công việc');
+    changeModalContent(<TaskForm />)
   };
   handleClose = () => {
     this.setState({
@@ -79,12 +82,12 @@ class TaskBoard extends React.Component {
     });
   };
 
-  renderForm() {
-    let xhtml = null;
-    const { open } = this.state;
-    xhtml = <TaskForm open={open} close={this.handleClose} />;
-    return xhtml;
-  };
+  // renderForm() {
+  //   let xhtml = null;
+  //   const { open } = this.state;
+  //   xhtml = <TaskForm open={open} close={this.handleClose} />;
+  //   return xhtml;
+  // };
 
   handleFilter=(e)=>{
     const {value} = e.target;
@@ -111,7 +114,7 @@ class TaskBoard extends React.Component {
         </Button>
         {this.renderSearchBox()}
         {this.renderBoard()}
-        {this.renderForm()}
+       
       </div>
     );
   }
@@ -119,11 +122,17 @@ class TaskBoard extends React.Component {
 //checkproptype
 TaskBoard.propTypes = {
   // classes.PropTypes.object,
-  taskAction: PropTypes.shape({
+  taskActionCreator: PropTypes.shape({
     fetchListTaskRequest: PropTypes.func,
   }),
   listTask: PropTypes.array,
   filterTask:PropTypes.func,
+  modalActionCreator:PropTypes.shape({
+    showModal:PropTypes.func,
+    hiddenModal:PropTypes.func,
+    changeModalContent:PropTypes.func,
+    changModalTitle:PropTypes.func,
+  })
 };
 //control store
 const mapStateToProps = (state) => {
@@ -134,6 +143,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, props) => {
   return {
     taskActionCreator: bindActionCreators(taskAction, dispatch),
+    modalActionCreator: bindActionCreators(modalAction, dispatch),
   };
 };
 export default withStyles(styles)(

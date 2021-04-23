@@ -7,6 +7,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./generator";
 import GlobalLoading from "./components/Global_Loading";
+import Modal from "./components/Modal";
 
 const store = configureStore();
 ReactDOM.render(
@@ -15,6 +16,7 @@ ReactDOM.render(
       <ToastContainer />
       <GlobalLoading />
       <App />
+      <Modal/>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
