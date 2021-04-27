@@ -17,6 +17,8 @@ const modalReducer = (state = initialState, action) => {
       return {
         ...state,
         showModal: false,
+        title:'',
+        components:null
       };
     case modalTypes.CHANGE_MODAL_TITLE:
       return{

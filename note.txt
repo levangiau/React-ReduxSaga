@@ -93,7 +93,7 @@ Generator function là gì?
 có khả năng thoát khỏi hàm sau đó nhập lại vào trong hàm và chạy tiếp .Mỗi lần thoát ra và chạy lại
 như vậy có thể lưu trữ các biến.
 
-=> generator khi gặp biến 'yeild' thì nó sẽ tạm dựng và trả kết quả sau đó nó lại chạy tiếp tục đến khi 
+=> generator khi gặp biến 'yeild' thì nó sẽ tạm dừng và trả kết quả sau đó nó lại chạy tiếp tục đến khi 
 hết các câu lệnh nhưng khi gặp từ khóa 'return' hoặc 'throw error' thì nó sẽ kết thúc fucntion đó luôn và những hàm sau câu gọi
 đó sẽ không thực thi. 
 
